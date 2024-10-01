@@ -1,6 +1,6 @@
 # OwlDomain License 1.0.0
 
-<https://github.com/Owl-Domain/.github/LICENSE.md>
+<https://github.com/Owl-Domain/.github/releases/tag/license-1.0.0>
 
 ## Acceptance
 
