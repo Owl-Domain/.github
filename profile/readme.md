@@ -14,6 +14,26 @@ It started feeling as if the entire world just stopped caring about creating hig
 And I'm here now because I'm just a single guy who has finally had enough of all of it. Originally I was just planning to make all of this software for my own personal use only, creating my own private garden *(hence `Owl's Domain` -> `OwlDomain`),* and then at some point *(and I don't even remember when exactly)* I decided to share it with the world, which combined with a lot of other stuff *(and life just being life),* and now this is something I want to use as my career, something I can dedicate all of my time to, as my own way to improve the world.
 
 
+## Socials
+
+[<img src="https://img.shields.io/discord/1411024983550853162?style=social&logo=discord&label=discord&link=https%3A%2F%2Fdiscord.gg%2FJtXMeqVGQc
+" alt="OwlDomain Discord server badge">](https://discord.gg/JtXMeqVGQc)
+
+### Discord
+
+We have a [Discord](https://discord.com/) community server set up, which you can join through the following [invite link](https://discord.gg/JtXMeqVGQc).
+
+This server is meant as a general purpose community server for anything OwlDomain related, such as:
+
+- General updates regarding the OwlDomain organisation.
+- Updates regarding the OwlDomain projects.
+- A place where you can discuss and ask questions about our projects.
+- A special 'journal' channel where you can listen to our developers ramble and geek out as they work on the projects.
+
+We also hope that this server will serve as a general place for people to hang out,
+meet interesting people, and remember what's important in life *(polish, serenity and quality of life)!*
+
+
 ## Logo attribution
 
 The new logo has been created by me ([Nightowl](https://github.com/nightowl286/)).
