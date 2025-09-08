@@ -16,8 +16,7 @@ And I'm here now because I'm just a single guy who has finally had enough of all
 
 ## Socials
 
-[<img src="https://img.shields.io/discord/1411024983550853162?style=social&logo=discord&label=discord&link=https%3A%2F%2Fdiscord.gg%2FJtXMeqVGQc
-" alt="OwlDomain Discord server badge">](https://discord.gg/JtXMeqVGQc)
+[<img src="https://img.shields.io/discord/1411024983550853162?style=social&logo=discord&label=discord&link=https%3A%2F%2Fdiscord.gg%2FJtXMeqVGQc" alt="OwlDomain Discord server badge">](https://discord.gg/JtXMeqVGQc)
 
 ### Discord
 
