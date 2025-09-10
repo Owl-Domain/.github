@@ -1,0 +1,6 @@
+{
+	"name": "Test .NET solution",
+	"description": "Builds and tests a full .NET solution.",
+	"categories": ["continuous-integration", "testing", "C#", "DotNetConsole", "DotNetCoreWorker"],
+	"filePaterns": ".*\\.sln$"
+}
