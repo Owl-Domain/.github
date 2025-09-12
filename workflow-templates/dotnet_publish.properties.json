@@ -1,0 +1,6 @@
+{
+	"name": "Publish .NET solution",
+	"description": "Publishes a .NET solution.",
+	"categories": ["continuous-integration", "deploy", "C#"],
+	"filePaterns": ".*\\.sln$"
+}

@@ -4,23 +4,15 @@ permissions:
   contents: write
 
 on:
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      tag-name:
+        description: The name of the tag for the Github release to upload the packages to.
+        type: string
+        required: true
 
 jobs:
-  ensure_release:
-    runs-on: ubuntu-latest
-    name: Ensure that a release exists.
-
-    steps:
-      - name: Ensure workflow run is happening for a tag.
-        if: ${{ github.ref_type }} != "tag"
-        run: exit 1
-
-      - name: Check for the release.
-        run: gh release view ${{ github.ref_name }}
-
   dotnet_pack:
-    needs: ensure_release
     uses: ./.github/workflows/dotnet_pack.yml
 
   nuget_upload:
@@ -36,4 +28,4 @@ jobs:
     uses: ./.github/workflows/upload_nuget_release.yml
     with:
       artifact-id: ${{ needs.dotnet_pack.outputs.artifact-id }}
-      tag-name: ${{ github.ref_name }}
+      tag-name: ${{ inputs.tag-name }}
