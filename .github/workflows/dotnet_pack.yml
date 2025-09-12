@@ -51,13 +51,17 @@ on:
         type: number
         default: 1
 
+    outputs:
+      artifact-id:
+        description: The id of the created package artifact.
+        value: ${{ jobs.pack.outputs.artifact-id }}
+
 jobs:
   pack:
     name: Pack the entire .NET solution.
     runs-on: ubuntu-latest
 
     outputs:
-      artifact-name: ${{ inputs.artifact-name }}
       artifact-id: ${{ steps.upload.outputs.artifact-id }}
 
     env:
