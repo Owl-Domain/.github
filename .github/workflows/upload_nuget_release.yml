@@ -1,0 +1,36 @@
+name: Upload package artifacts to Github release
+
+permissions:
+  contents: write
+
+on:
+  workflow_call: # Required for reusable workflows.
+    inputs:
+      artifact-id:
+        description: The id of the artifact to download from the workflow and then upload to a Github release.
+        type: string
+        required: true
+
+      tag-name:
+        description: The name of the tag for the Github release to upload the packages to.
+        type: string
+        required: true
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    name: Upload artifact packages to NuGet
+
+    steps:
+      - name: Download artifact packages.
+        uses: actions/download-artifact@v5
+        with:
+          artifact-ids: ${{ inputs.artifact-id }}
+          path: "${{ runner.temp }}/nuget_packages"
+          merge-multiple: true
+
+      - name: Upload artifact packages.
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag-name }}
+          files: "${{ runner.temp }}/nuget_packages/*"
