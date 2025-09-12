@@ -1,0 +1,39 @@
+name: Publish NuGet packages
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ensure_release:
+    runs-on: ubuntu-latest
+    name: Ensure that a release exists.
+
+    steps:
+      - name: Ensure workflow run is happening for a tag.
+        if: ${{ github.ref_type }} != "tag"
+        run: exit 1
+
+      - name: Check for the release.
+        run: gh release view ${{ github.ref_name }}
+
+  dotnet_pack:
+    needs: ensure_release
+    uses: ./.github/workflows/dotnet_pack.yml
+
+  nuget_upload:
+    needs: dotnet_pack
+    uses: ./.github/workflows/upload_nuget.yml
+    secrets:
+      NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+    with:
+      artifact-id: ${{ needs.dotnet_pack.outputs.artifact-id }}
+
+  release_upload:
+    needs: dotnet_pack
+    uses: ./.github/workflows/upload_nuget_release.yml
+    with:
+      artifact-id: ${{ needs.dotnet_pack.outputs.artifact-id }}
+      tag-name: ${{ github.ref_name }}

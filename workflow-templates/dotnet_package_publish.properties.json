@@ -1,0 +1,6 @@
+{
+	"name": "Publish NuGet packages",
+	"description": "Publishes the NuGet packages from a .NET solution.",
+	"categories": ["continuous-integration", "deploy", "C#"],
+	"filePaterns": ".*\\.sln$"
+}
