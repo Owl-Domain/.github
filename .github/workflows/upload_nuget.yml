@@ -16,11 +16,6 @@ on:
         type: string
         required: true
 
-      nuget-token:
-        description: The API token required for uploading packages to NuGet.
-        type: string
-        required: true
-
       endpoint:
         description: The NuGet endpoint to upload the packages to.
         type: string
@@ -30,6 +25,11 @@ on:
         description: Whether duplicate packages should be skipped.
         type: boolean
         default: true
+
+    secrets:
+        NUGET_TOKEN:
+          description: The API token required for uploading packages to NuGet.
+          required: true
 
 jobs:
   upload:
@@ -61,4 +61,4 @@ jobs:
               dotnet nuget push "${{ runner.temp }}/nuget_packages/*" -k $NUGET_TOKEN -s ${{ inputs.endpoint }}
             fi
         env:
-          NUGET_TOKEN: ${{ inputs.nuget-token }}
+          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
