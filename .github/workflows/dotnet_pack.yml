@@ -1,0 +1,112 @@
+name: Pack .NET solution
+
+permissions:
+  contents: read
+
+on:
+  workflow_call: # Required for reusable workflows.
+    inputs:
+      dotnet-version:
+        description: The .NET version to install.
+        type: string
+        default: '9'
+
+      cache-nuget:
+        description: Whether .NET packages should be locked and cached.
+        type: boolean
+        default: true
+
+      remove-playground-project:
+        description: Whether the local Playground project should be removed.
+        type: boolean
+        default: true
+
+      playground-project-path:
+        description: The path to the local Playground project.
+        type: string
+        default: local/Playground/Playground.csproj
+
+      configuration:
+        description: The configuration to build, test and pack the .NET solution with.
+        type: string
+        default: Release
+
+      directory-path:
+        description: The path to the directory where the .NET solution is.
+        type: string
+        default: src
+
+      if-no-files-found:
+        description: The action to take if there were no resulting packges to upload.
+        type: string
+        default: error
+
+      artifact-name:
+        description: The name of the artifact to upload the generated NuGet packages to.
+        type: string
+        default: nuget-packages
+
+      retention-days:
+        description: The amount of days that the uploaded workflow artifacts should be rained for.
+        type: number
+        default: 1
+
+jobs:
+  pack:
+    name: Pack the entire .NET solution.
+    runs-on: ubuntu-latest
+
+    outputs:
+      artifact-name: ${{ inputs.artifact-name }}
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+    steps:
+      - name: Checkout repository.
+        uses: actions/checkout@v5
+
+      - name: Install the .NET workflow.
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ inputs.dotnet-version }}
+          cache: ${{ inputs.cache-nuget }}
+
+      - name: Ensure local Playground project is removed if it exists.
+        if: ${{ inputs.remove-playground-project }}
+        working-directory: ${{ inputs.directory-path }}
+        run: dotnet sln remove ${{ inputs.playground-project-path }}
+
+      - name: Restore the .NET solution.
+        working-directory: ${{ inputs.directory-path }}
+        run: |
+          if [ "${{ inputs.cache-nuget }}" == "true" ]; then
+            dotnet restore --locked-mode
+          else
+            dotnet restore
+          fi
+
+      - name: Build the .NET solution.
+        working-directory: ${{ inputs.directory-path }}
+        run: dotnet build --no-restore --configuration ${{ inputs.configuration }}
+
+      - name: Test the .NET solution.
+        working-directory: ${{ inputs.directory-path }}
+        run: dotnet test --no-restore --no-build --configuration ${{ inputs.configuration }}
+
+      - name: Pack the .NET solution.
+        working-directory: ${{ inputs.directory-path }}
+        run: dotnet pack --no-restore --no-build --configuration ${{ inputs.configuration }} --output "${{ runner.temp }}/package_output"
+
+      - name: Upload NuGet packages as workflow artifacts.
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: "${{ runner.temp }}/package_output"
+          if-no-files-found: ${{ inputs.if-no-files-found }}
+          retention-days: ${{ inputs.retention-days }}
+          compression-level: 0
