@@ -11,6 +11,11 @@ on:
         type: string
         required: true
 
+    secrets:
+        NUGET_TOKEN:
+          description: The API token required for uploading packages to NuGet.
+          required: true
+
 jobs:
   dotnet_pack:
     uses: ./.github/workflows/dotnet_pack.yml

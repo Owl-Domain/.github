@@ -34,7 +34,7 @@ on:
 jobs:
   upload:
     runs-on: ubuntu-latest
-    name: Upload artifact packages to NuGet
+    name: Upload to NuGet
 
     env:
       DOTNET_NOLOGO: true
@@ -56,9 +56,9 @@ jobs:
       - name: Upload packages to NuGet.
         run: |
             if [ "${{ inputs.skip-duplicates }}" == "true" ]; then
-              dotnet nuget push "${{ runner.temp }}/nuget_packages/*" -k $NUGET_TOKEN -s ${{ inputs.endpoint }} --skip-duplicate
+              dotnet nuget push "${{ runner.temp }}/nuget_packages/*" --api-key $NUGET_TOKEN --source ${{ inputs.endpoint }} --skip-duplicate
             else
-              dotnet nuget push "${{ runner.temp }}/nuget_packages/*" -k $NUGET_TOKEN -s ${{ inputs.endpoint }}
+              dotnet nuget push "${{ runner.temp }}/nuget_packages/*" --api-key $NUGET_TOKEN --source ${{ inputs.endpoint }}
             fi
         env:
           NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
