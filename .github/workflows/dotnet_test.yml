@@ -19,7 +19,7 @@ on:
       nuget-lock-path:
         description: The path to the packages.lock.json file to use.
         type: string
-        default: "${{ inputs.directory-path }}/packages.lock.json"
+        default: src/packages.lock.json
 
       remove-playground-project:
         description: Whether the local Playground project should be removed.
