@@ -78,4 +78,4 @@ jobs:
 
       - name: Lint the .NET solution.
         working-directory: ${{ inputs.directory-path }}
-        run: dotnet format --no-restore --verify-no-changes ${{ inputs.verbosity }}
+        run: dotnet format --no-restore --verify-no-changes --verbosity ${{ inputs.verbosity }}
