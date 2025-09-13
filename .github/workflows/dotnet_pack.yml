@@ -16,6 +16,11 @@ on:
         type: boolean
         default: true
 
+      nuget-lock-path:
+        description: The path to the packages.lock.json file to use.
+        type: string
+        default: "${{ inputs.directory-path }}/packages.lock.json"
+
       remove-playground-project:
         description: Whether the local Playground project should be removed.
         type: boolean
@@ -78,6 +83,7 @@ jobs:
         with:
           dotnet-version: ${{ inputs.dotnet-version }}
           cache: ${{ inputs.cache-nuget }}
+          cache-dependency-path: ${{ inputs.nuget-lock-path }}
 
       - name: Ensure local Playground project is removed if it exists.
         if: ${{ inputs.remove-playground-project }}
