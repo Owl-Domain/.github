@@ -11,6 +11,16 @@ on:
         type: string
         required: true
 
+      cache-nuget:
+        description: Whether .NET packages should be locked and cached.
+        type: boolean
+        default: false
+
+      nuget-lock-path:
+        description: The path to the packages.lock.json file to use.
+        type: string
+        default: src/packages.lock.json
+
     secrets:
         NUGET_TOKEN:
           description: The API token required for uploading packages to NuGet.
@@ -19,6 +29,9 @@ on:
 jobs:
   dotnet_pack:
     uses: ./.github/workflows/dotnet_pack.yml
+    with:
+      cache-nuget: ${{ inputs.cache-nuget }}
+      nuget-lock-path: ${{ inputs.nuget-lock-path }}
 
   nuget_upload:
     needs: dotnet_pack

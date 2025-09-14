@@ -14,7 +14,7 @@ on:
       cache-nuget:
         description: Whether .NET packages should be locked and cached.
         type: boolean
-        default: true
+        default: false
 
       nuget-lock-path:
         description: The path to the packages.lock.json file to use.
