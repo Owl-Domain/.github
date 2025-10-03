@@ -43,6 +43,12 @@ In a C# project (a .csproj file) that would look like this:
 <!-- Fill in the usage section -->
 
 
+## Development
+
+Currently this project is being developed on the `develop` branch, changes will be
+merged to `main` *(the default branch)* whenever there is a package update.
+
+
 ## Contributions
 
 Code contributions will not be accepted, however feel free to provide feedback / suggestions
