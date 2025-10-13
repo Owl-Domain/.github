@@ -1,4 +1,4 @@
-name: aot test
+name: aot
 
 permissions:
   contents: read
@@ -12,5 +12,5 @@ on:
   workflow_dispatch: # Allow manual runs
 
 jobs:
-  aot_test:
+  aot:
     uses: Owl-Domain/.github/.github/workflows/dotnet_aot_compatibility_test.yml@main
