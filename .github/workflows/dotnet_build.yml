@@ -78,4 +78,4 @@ jobs:
 
       - name: Build the .NET solution.
         working-directory: ${{ inputs.directory-path }}
-        run: dotnet build --no-restore --configuration ${{ inputs.configuration }}
+        run: dotnet build --warnaserror --no-restore --configuration ${{ inputs.configuration }}
