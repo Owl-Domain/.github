@@ -1,0 +1,74 @@
+name: Test .NET AOT compatibility
+
+permissions:
+  contents: read
+
+on:
+  workflow_call: # Required for reusable workflows.
+    inputs:
+      dotnet-version:
+        description: The .NET version to install.
+        type: string
+        default: '9'
+
+      remove-playground-project:
+        description: Whether the local Playground project should be removed.
+        type: boolean
+        default: true
+
+      playground-project-path:
+        description: The path to the local Playground project.
+        type: string
+        default: local/Playground/Playground.csproj
+
+      configuration:
+        description: The configuration to build and test the .NET solution with.
+        type: string
+        default: Release
+
+      directory-path:
+        description: The path to the directory where the .NET solution is.
+        type: string
+        default: src
+
+      project-directory:
+        description: The path to the AotCompatability test project directory.
+        type: string
+        default: src/AotCompatability.TestApp
+
+      runs-on:
+        description: The type of the machine to run the job on.
+        type: string
+        default: ubuntu-latest
+
+      runtime:
+        description: The runtime identifier to use for publishing the AotCompatability test project.
+        type: string
+        default: linux-x64
+
+jobs:
+  aot_test:
+    name: Test AOT compatibility
+    runs-on: ${{ inputs.runs-on }}
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+      - name: Checkout repository.
+        uses: actions/checkout@v5
+
+      - name: Install the .NET workflow.
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ inputs.dotnet-version }}
+
+      - name: Ensure local Playground project is removed if it exists.
+        if: ${{ inputs.remove-playground-project }}
+        working-directory: ${{ inputs.directory-path }}
+        run: dotnet sln remove ${{ inputs.playground-project-path }}
+
+      - name: Publish the AotCompatability test project.
+        working-directory: ${{ inputs.project-directory }}
+        run: dotnet publish --warnaserror --configuration ${{ inputs.configuration }} --runtime ${{ inputs.runtime }}

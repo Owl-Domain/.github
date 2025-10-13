@@ -1,0 +1,6 @@
+{
+	"name": "Test AOT compatibility",
+	"description": "Builds and publishes an AotCompatability project.",
+	"categories": ["continuous-integration", "testing", "C#", "DotNetConsole", "DotNetCoreWorker"],
+	"filePaterns": ".*\\.sln$"
+}

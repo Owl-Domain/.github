@@ -1,0 +1,16 @@
+name: aot test
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: '**'
+    paths:
+      - 'src/**' # React to source files changing
+
+  workflow_dispatch: # Allow manual runs
+
+jobs:
+  build:
+    uses: Owl-Domain/.github/.github/workflows/dotnet_aot_compatibility_test.yml@main
