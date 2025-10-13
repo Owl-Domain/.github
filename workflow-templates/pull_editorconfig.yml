@@ -12,3 +12,5 @@ on:
 jobs:
   pull_editorconfig:
     uses: Owl-Domain/editorconfig/.github/workflows/pull_editorconfig.yml@main
+    with:
+      base: develop
