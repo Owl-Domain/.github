@@ -48,7 +48,6 @@ on:
 
 jobs:
   aot_test:
-    name: Test AOT compatibility
     runs-on: ${{ inputs.runs-on }}
 
     env:

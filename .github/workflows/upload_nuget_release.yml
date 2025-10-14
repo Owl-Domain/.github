@@ -17,9 +17,8 @@ on:
         required: true
 
 jobs:
-  upload:
+  upload_github:
     runs-on: ubuntu-latest
-    name: Upload to Github release
 
     steps:
       - name: Download artifact packages.

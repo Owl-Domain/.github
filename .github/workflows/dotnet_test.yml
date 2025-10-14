@@ -43,7 +43,6 @@ on:
 
 jobs:
   test:
-    name: Test the entire .NET solution.
     runs-on: ubuntu-latest
 
     env:

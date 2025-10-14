@@ -9,7 +9,6 @@ on:
 jobs:
   ensure_release:
     runs-on: ubuntu-latest
-    name: Ensure that a release exists.
 
     steps:
       - name: Ensure workflow run is happening for a tag.
@@ -23,7 +22,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  publish_packages:
+  publish:
     needs: ensure_release
     uses: Owl-Domain/.github/.github/workflows/dotnet_package_publish.yml@main
     secrets:

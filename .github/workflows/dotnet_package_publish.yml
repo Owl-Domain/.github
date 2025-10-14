@@ -27,23 +27,23 @@ on:
           required: true
 
 jobs:
-  dotnet_pack:
+  pack:
     uses: ./.github/workflows/dotnet_pack.yml
     with:
       cache-nuget: ${{ inputs.cache-nuget }}
       nuget-lock-path: ${{ inputs.nuget-lock-path }}
 
-  nuget_upload:
-    needs: dotnet_pack
+  upload_nuget:
+    needs: pack
     uses: ./.github/workflows/upload_nuget.yml
     secrets:
       NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
     with:
-      artifact-id: ${{ needs.dotnet_pack.outputs.artifact-id }}
+      artifact-id: ${{ needs.pack.outputs.artifact-id }}
 
-  release_upload:
-    needs: dotnet_pack
+  upload_github:
+    needs: pack
     uses: ./.github/workflows/upload_nuget_release.yml
     with:
-      artifact-id: ${{ needs.dotnet_pack.outputs.artifact-id }}
+      artifact-id: ${{ needs.pack.outputs.artifact-id }}
       tag-name: ${{ inputs.tag-name }}

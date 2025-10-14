@@ -43,7 +43,6 @@ on:
 
 jobs:
   build:
-    name: Build the entire .NET solution.
     runs-on: ubuntu-latest
 
     env:

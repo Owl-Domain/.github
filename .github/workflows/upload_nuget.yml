@@ -32,9 +32,8 @@ on:
           required: true
 
 jobs:
-  upload:
+  upload_nuget:
     runs-on: ubuntu-latest
-    name: Upload to NuGet
 
     env:
       DOTNET_NOLOGO: true

@@ -42,8 +42,7 @@ on:
         default: diagnostic
 
 jobs:
-  build:
-    name: Lint the entire .NET solution.
+  lint:
     runs-on: ubuntu-latest
 
     env:
