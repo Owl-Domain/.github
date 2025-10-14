@@ -1,5 +1,3 @@
-name: Lint .NET solution
-
 permissions:
   contents: read
 
