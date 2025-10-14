@@ -12,7 +12,7 @@ on:
   workflow_dispatch: # Allow manual runs
 
 jobs:
-  build:
+  test:
     strategy:
       fail-fast: false
       matrix:
