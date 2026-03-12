@@ -1,6 +1,0 @@
-{
-	"name": "Build .NET solution",
-	"description": "Builds a full .NET solution.",
-	"categories": ["continuous-integration", "C#", "DotNetConsole", "DotNetCoreWorker"],
-	"filePaterns": ".*\\.sln$"
-}

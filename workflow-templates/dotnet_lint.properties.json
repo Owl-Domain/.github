@@ -1,6 +1,0 @@
-{
-	"name": "Lint .NET solution",
-	"description": "Lints a full .NET solution.",
-	"categories": ["code-quality", "code-review", "C#", "DotNetConsole", "DotNetCoreWorker"],
-	"filePaterns": ".*\\.sln$"
-}

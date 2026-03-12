@@ -1,6 +1,0 @@
-{
-	"name": "Pull latest .editorconfig",
-	"description": "Pulls the latest OwlDomain .editorconfig file and creates a pull request to merge into the repository.",
-	"categories": ["Automation"],
-	"filePaterns": "\\.editorconfig"
-}
